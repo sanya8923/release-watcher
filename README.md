@@ -2,7 +2,22 @@
 
 Раз в день мониторит GitHub Releases в `n8n-io/n8n`, `anthropics/claude-code`,
 `openai/codex`, `openclaw/openclaw`. Каждый новый релиз прогоняется через
-Claude Haiku 4.5 и публикуется отдельным сообщением в Telegram.
+Claude Haiku 4.5 и публикуется отдельным сообщением в Telegram — от имени
+**@vb_regular_alert_bot** (рассыльный бот; @vibe_business_official_bot для рассылок
+не используется, на нём держатся платежи).
+
+## Куда что уходит
+
+| Репо | Чат | Топик |
+|---|---|---|
+| `n8n-io/n8n` | `-1003685199216` «Vibe Business \| Конвейер» | `3410` |
+| `anthropics/claude-code` | `-1004473285129` закрытый клуб по нейросетям | `632` |
+| `openai/codex` | тот же клуб | `632` |
+| `openclaw/openclaw` | тот же клуб | `632` |
+
+Маршруты захардкожены в `DESTINATION` в `watcher.py`. Бот обязан состоять в обоих
+чатах — иначе Telegram вернёт 400 и релиз не отправится (state не сдвинется,
+следующий прогон попробует снова).
 
 ## Что делает
 
@@ -10,15 +25,14 @@ Claude Haiku 4.5 и публикуется отдельным сообщение
 2. Для каждого репо тянет последние 10 релизов через GitHub API
 3. Сравнивает с `state.json` (по `release.id`)
 4. Новые релизы (не draft, не prerelease) → Claude Haiku 4.5 → русское саммари
-5. Шлёт в Telegram через Bot API на захардкоженный chat_id
+5. Шлёт в Telegram через Bot API в топик, закреплённый за этим репо (`DESTINATION`)
 6. Обновляет `state.json` и коммитит обратно
 
 ## Локальный запуск
 
 ```bash
 export ANTHROPIC_API_KEY=sk-ant-...
-export TELEGRAM_BOT_TOKEN=123:ABC...
-export TELEGRAM_CHAT_ID=5102838218
+export TELEGRAM_BOT_TOKEN=123:ABC...   # токен @vb_regular_alert_bot
 
 pip install -r requirements.txt
 python watcher.py
@@ -42,8 +56,7 @@ python watcher.py
 gh repo create sanya8923/release-watcher --public --source=. --push
 
 gh secret set ANTHROPIC_API_KEY --body "sk-ant-..."
-gh secret set TELEGRAM_BOT_TOKEN --body "$(ssh profy-conveyor 'sudo docker exec broadcast-bot env | grep BROADCAST_BOT_TOKEN | cut -d= -f2-')"
-gh secret set TELEGRAM_CHAT_ID --body "5102838218"
+gh secret set TELEGRAM_BOT_TOKEN --body "<токен @vb_regular_alert_bot>"
 
 gh workflow run release-watcher.yml
 gh run watch

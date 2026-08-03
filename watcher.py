@@ -34,12 +34,21 @@ DISPLAY_NAME = {
     "openclaw/openclaw": "OpenClaw",
 }
 
+# Куда шлём релизы каждого репо: (chat_id, message_thread_id).
+# -1003685199216 — «Vibe Business | Конвейер», топик 3410 (n8n).
+# -1004473285129 — закрытый клуб по нейросетям, топик 632 (агентские CLI).
+DESTINATION = {
+    "n8n-io/n8n": ("-1003685199216", 3410),
+    "anthropics/claude-code": ("-1004473285129", 632),
+    "openai/codex": ("-1004473285129", 632),
+    "openclaw/openclaw": ("-1004473285129", 632),
+}
+
 STATE_PATH = Path(__file__).parent / "state.json"
 CLAUDE_MODEL = "claude-haiku-4-5"
 
 ANTHROPIC_KEY = os.environ["ANTHROPIC_API_KEY"]
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
-TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 
 anthropic_client = Anthropic(api_key=ANTHROPIC_KEY)
 
@@ -169,10 +178,12 @@ def build_message(release: dict, repo: str, summary: str) -> str:
     )
 
 
-def send_telegram(text: str) -> bool:
+def send_telegram(text: str, repo: str) -> bool:
+    chat_id, thread_id = DESTINATION[repo]
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
+        "chat_id": chat_id,
+        "message_thread_id": thread_id,
         "text": text,
         "parse_mode": "MarkdownV2",
         "disable_web_page_preview": False,
@@ -235,10 +246,11 @@ def main() -> None:
             log(f"  Обрабатываю {release['tag_name']} (id={release['id']})")
             summary = summarize_with_claude(release, repo)
             text = build_message(release, repo, summary)
-            if send_telegram(text):
+            if send_telegram(text, repo):
                 state[repo] = state_entry(release)
                 sent_count += 1
-                log(f"  ✓ отправлено")
+                chat_id, thread_id = DESTINATION[repo]
+                log(f"  ✓ отправлено в {chat_id}, топик {thread_id}")
             else:
                 log(f"  ✗ не отправлено, прерываем repo (попробуем завтра)")
                 break
