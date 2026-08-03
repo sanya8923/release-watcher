@@ -32,7 +32,10 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: python watcher.py
 
+      # always(): watcher выходит с кодом 1, если хоть один релиз не доставлен.
+      # Успевшие отправиться релизы уже в state — без коммита они уйдут повторно.
       - name: Commit state if changed
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

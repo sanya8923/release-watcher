@@ -215,6 +215,7 @@ def main() -> None:
         log("Bootstrap режим: state пустой, сообщения слаться НЕ будут")
 
     sent_count = 0
+    failed_repos: list[str] = []
     for repo in REPOS:
         log(f"Repo: {repo}")
         releases = fetch_releases(repo)
@@ -253,10 +254,15 @@ def main() -> None:
                 log(f"  ✓ отправлено в {chat_id}, топик {thread_id}")
             else:
                 log(f"  ✗ не отправлено, прерываем repo (попробуем завтра)")
+                failed_repos.append(repo)
                 break
 
     save_state(state)
     log(f"Готово. Отправлено сообщений: {sent_count}")
+    if failed_repos:
+        # Красим прогон в красный: молчание бота иначе никак не заметить.
+        log(f"Недоставлено по репо: {', '.join(failed_repos)}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
