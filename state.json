@@ -1,13 +1,13 @@
 {
   "n8n-io/n8n": {
-    "last_release_id": 364054472,
-    "last_tag": "n8n@1.123.68",
-    "last_published_at": "2026-08-03T07:47:55Z"
+    "last_release_id": 365382090,
+    "last_tag": "n8n@2.33.4",
+    "last_published_at": "2026-08-05T08:32:58Z"
   },
   "anthropics/claude-code": {
-    "last_release_id": 364520051,
-    "last_tag": "v2.1.221",
-    "last_published_at": "2026-08-04T00:14:23Z"
+    "last_release_id": 365137491,
+    "last_tag": "v2.1.222",
+    "last_published_at": "2026-08-04T22:39:55Z"
   },
   "openai/codex": {
     "last_release_id": 361463950,
