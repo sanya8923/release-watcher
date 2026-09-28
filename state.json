@@ -10,9 +10,9 @@
     "last_published_at": "2026-09-25T21:50:12Z"
   },
   "openai/codex": {
-    "last_release_id": 397006677,
-    "last_tag": "rust-v0.157.1",
-    "last_published_at": "2026-09-26T01:02:31Z"
+    "last_release_id": 397962047,
+    "last_tag": "rust-v0.158.0",
+    "last_published_at": "2026-09-28T05:07:23Z"
   },
   "openclaw/openclaw": {
     "last_release_id": 395067017,
