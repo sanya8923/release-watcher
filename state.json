@@ -5,9 +5,9 @@
     "last_published_at": "2026-10-02T07:27:37Z"
   },
   "anthropics/claude-code": {
-    "last_release_id": 401174143,
-    "last_tag": "v2.1.287",
-    "last_published_at": "2026-10-01T18:00:22Z"
+    "last_release_id": 402056988,
+    "last_tag": "v2.1.288",
+    "last_published_at": "2026-10-02T20:19:57Z"
   },
   "openai/codex": {
     "last_release_id": 401312540,
@@ -15,8 +15,8 @@
     "last_published_at": "2026-10-01T20:19:13Z"
   },
   "openclaw/openclaw": {
-    "last_release_id": 401871303,
-    "last_tag": "v2026.8.35",
-    "last_published_at": "2026-10-02T14:06:34Z"
+    "last_release_id": 402271245,
+    "last_tag": "v2026.9.8",
+    "last_published_at": "2026-10-03T03:21:47Z"
   }
 }
