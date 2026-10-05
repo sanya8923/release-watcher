@@ -1,8 +1,8 @@
 {
   "n8n-io/n8n": {
-    "last_release_id": 401614245,
-    "last_tag": "n8n@2.41.6",
-    "last_published_at": "2026-10-02T07:27:37Z"
+    "last_release_id": 403462905,
+    "last_tag": "n8n@2.41.7",
+    "last_published_at": "2026-10-05T07:26:35Z"
   },
   "anthropics/claude-code": {
     "last_release_id": 402671979,
