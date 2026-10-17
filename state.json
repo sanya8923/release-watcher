@@ -5,9 +5,9 @@
     "last_published_at": "2026-10-16T07:23:56Z"
   },
   "anthropics/claude-code": {
-    "last_release_id": 413913133,
-    "last_tag": "v2.1.301",
-    "last_published_at": "2026-10-15T19:22:06Z"
+    "last_release_id": 415177347,
+    "last_tag": "v2.1.302",
+    "last_published_at": "2026-10-16T20:53:06Z"
   },
   "openai/codex": {
     "last_release_id": 414286110,
