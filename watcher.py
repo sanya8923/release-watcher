@@ -15,33 +15,21 @@ from anthropic import Anthropic
 
 REPOS = [
     "n8n-io/n8n",
-    "anthropics/claude-code",
-    "openai/codex",
-    "openclaw/openclaw",
 ]
 
 EMOJI = {
     "n8n-io/n8n": "🟣",
-    "anthropics/claude-code": "🤖",
-    "openai/codex": "🧠",
-    "openclaw/openclaw": "🦞",
 }
 
 DISPLAY_NAME = {
     "n8n-io/n8n": "n8n",
-    "anthropics/claude-code": "Claude Code",
-    "openai/codex": "Codex",
-    "openclaw/openclaw": "OpenClaw",
 }
 
 # Куда шлём релизы каждого репо: (chat_id, message_thread_id).
 # -1003685199216 — «Vibe Business | Конвейер», топик 3410 (n8n).
-# -1004473285129 — закрытый клуб по нейросетям, топик 632 (агентские CLI).
+# Релизы агентских CLI в клуб шлёт Радар Telegram (tg-radar#114), здесь их нет.
 DESTINATION = {
     "n8n-io/n8n": ("-1003685199216", 3410),
-    "anthropics/claude-code": ("-1004473285129", 632),
-    "openai/codex": ("-1004473285129", 632),
-    "openclaw/openclaw": ("-1004473285129", 632),
 }
 
 STATE_PATH = Path(__file__).parent / "state.json"
